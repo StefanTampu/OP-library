@@ -6,6 +6,7 @@
 
 :root {
     --toledo: #312229;
+    --light-toledo: hsl(332, 18%, 24%);
     --bordeaux: #54101d;
     --chambray: #47596f;
     --teak: #b18653;
@@ -47,18 +48,22 @@ header h1{
     min-width: 100%;
     min-height: 100%;
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    gap: 2rem;
+    grid-template-rows: 1fr 1rem 1fr;
+    gap: 1rem;
+}
 
-/*
-    grid-template: 15rem 15rem / repeat(auto-fit, 1fr);
-
+hr{
+    border: none;
+    height: 1rem;
+    background: linear-gradient(90deg, var(--toledo), var(--light-toledo), var(--toledo));
+/*    width: calc(100% + 4rem);
+    margin: 0 -2rem;
 */
 }
 
 .book-case{
     display: grid;
-    grid-template: 3rem 15rem;
+    grid-template-rows: 2rem 15rem;
     gap: 2rem;
     max-width: max-content;
 }
@@ -102,4 +107,28 @@ header h1{
 
 #reading .book-container {
     border-left: 1rem solid var(--bordeaux);
+}
+
+.add{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s ease-in;
+}
+
+#add-read:hover{
+    background-color: var(--chambray);
+}
+
+#add-reading:hover{
+    background-color: var(--bordeaux);
+}
+
+.add img{
+    height: 7.5rem;
+    transition: 0.5s;
+}
+
+.add:hover img{
+    height: 8.5rem;
 }
