@@ -8,7 +8,7 @@
     --toledo: #312229;
     --light-toledo: hsl(332, 18%, 24%);
     --bordeaux: #56101d;
-    --dark-bordeaux: hsl(349, 68%, 10%); 
+    --dark-bordeaux: hsl(349, 68%, 5%); 
     --chambray: #47596f;
     --teak: #b18653;
     --stark-white: #d5c5ae;
@@ -136,4 +136,50 @@ hr{
 
 .add:hover img{
     height: 8.5rem;
+}
+
+/*Form styling*/
+
+form {
+    height: 50vh;
+    width: 35vw;
+    padding: 1.5rem;
+    border-radius: 0 12.5rem;
+    background: radial-gradient(var(--bordeaux), var(--dark-bordeaux));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    color: white;
+}
+
+form h1{
+    font-size: 2.5rem;
+    text-decoration:underline;
+}
+
+input {
+    height: 3rem;
+    width: 75%;
+    font-size: 1.5rem;
+    color: var(--bordeaux);
+    background-color: var(--stark-white);
+    border: 0.25rem solid white;
+    border-radius: 0.5rem;
+}
+
+form button {
+    height: 3rem;
+    width: 30%;
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    background: transparent;
+    color: white;
+    border: none;
+}
+
+form button:hover {
+    border: 0.25rem double white;
 }
