@@ -7,7 +7,8 @@
 :root {
     --toledo: #312229;
     --light-toledo: hsl(332, 18%, 24%);
-    --bordeaux: #54101d;
+    --bordeaux: #56101d;
+    --dark-bordeaux: hsl(349, 68%, 10%); 
     --chambray: #47596f;
     --teak: #b18653;
     --stark-white: #d5c5ae;
@@ -30,7 +31,7 @@ header{
     width: 100vw;
     height: 6rem;
     padding: 2rem;
-    background-color: var(--bordeaux);
+    background: linear-gradient(90deg, var(--dark-bordeaux), var(--bordeaux), var(--dark-bordeaux));
     color: white;
     font-size: 2rem;
     font-weight: 600;
@@ -97,6 +98,10 @@ hr{
     font-size: 1.5rem;
     border-radius: 0.5rem;
     border-left: 1rem solid var(--chambray);
+}
+
+.strong{
+    font-weight: 900;
 }
 
 .b-title{
