@@ -33,6 +33,8 @@ const addBookToArr = (title, author, pagesRead, pagesTotal, read) => {
 //Function for displaying books from arrays in library//
 const displayBooks = arr => {
     arr.forEach((element) => {
+        let a = arr.indexOf(element); 
+
         const bookContainer = document.createElement("div");
         bookContainer.classList.add("book-container");
 
@@ -53,12 +55,12 @@ const displayBooks = arr => {
         
         const removeIcon = document.createElement("img");
         removeIcon.src="Resources/book-minus.svg";
-        removeIcon.classList.add("icon");
-        removeIcon.setAttribute("id","remove-icon");
+        removeIcon.classList.add("icon", "remove");
+        removeIcon.setAttribute("id", a);
 
         const editIcon = document.createElement("img");
         editIcon.src="Resources/book-edit.svg";
-        editIcon.classList.add("icon");
+        editIcon.classList.add("icon", "edit");
         editIcon.setAttribute("id", "edit-icon");
 
         iconContainer.append(removeIcon, editIcon);
@@ -117,8 +119,35 @@ const inputToBook = event => {
     }
 }
 
-
 form.addEventListener("submit", inputToBook);
 
 addBookToArr('Yo', "Ma", 15, 20, null);
+addBookToArr('Ya', "Mo", 16, 20, null);
 displayBooks(booksReadingArr);
+
+//Delete book function
+const deleteBook = event => {
+    console.log(event.target.id);
+    console.log(booksReadingArr);
+        if (event.target.parentElement.parentElement.parentElement.id === "b-reading"){
+            booksReadingArr.splice(event.target.id, 1);
+            while (!bReading.firstElementChild.classList.contains("add")){ 
+                bReading.removeChild(bReading.firstChild);
+            }
+            displayBooks(booksReadingArr);  
+        } else if (event.target.parentElement.parentElement.parentElement.id === "b-read") {
+            console.log("Hi");
+            booksReadArr.splice(event.target.id, 1);
+            while (!bRead.firstElementChild.classList.contains("add")){ 
+                bRead.removeChild(bRead.firstChild);
+            }
+            displayBooks(booksReadArr);
+        };
+
+}
+
+let rmvButtons = document.querySelectorAll(".remove");
+
+for (let rmvButton of rmvButtons){
+    rmvButton.addEventListener("click", deleteBook)
+}
