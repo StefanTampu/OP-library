@@ -63,7 +63,7 @@ const formVisibility = () => {
             formSection.style.opacity = "1";
             if (addButton.id === "add-read"){
                 form.removeChild(formPRead);
-            } else if (addButton.id === "add-reading"){
+            } else {
                 form.insertBefore(formPRead, totalPages);
             }
         });
