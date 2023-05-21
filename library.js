@@ -30,22 +30,39 @@ const addBookToArr = (title, author, pagesRead, pagesTotal, read) => {
     }
 }
 
-
 //Function for displaying books from arrays in library//
 const displayBooks = arr => {
     arr.forEach((element) => {
         const bookContainer = document.createElement("div");
         bookContainer.classList.add("book-container");
+
         const bookTitle = document.createElement("p");
         bookTitle.classList.add("b-title");
         bookTitle.textContent = `Title: ${element.title}`;
+
         const bookAuthor = document.createElement("p");
         bookAuthor.classList.add("b-author");
         bookAuthor.textContent = `Author: ${element.author}`;
+
         const bookPages = document.createElement("p");
         bookPages.classList.add("b-pages");
         bookPages.textContent = `Pages read: ${element.pagesRead} / ${element.pagesTotal}`;
-        bookContainer.append(bookTitle, bookAuthor, bookPages);
+
+        const iconContainer = document.createElement("div");
+        iconContainer.classList.add("icon-container")
+        
+        const removeIcon = document.createElement("img");
+        removeIcon.src="Resources/book-minus.svg";
+        removeIcon.classList.add("icon");
+        removeIcon.setAttribute("id","remove-icon");
+
+        const editIcon = document.createElement("img");
+        editIcon.src="Resources/book-edit.svg";
+        editIcon.classList.add("icon");
+        editIcon.setAttribute("id", "edit-icon");
+
+        iconContainer.append(removeIcon, editIcon);
+        bookContainer.append(bookTitle, bookAuthor, bookPages, iconContainer);
         if(arr === booksReadArr){
             bRead.insertBefore(bookContainer, addRead);
         } else if(arr === booksReadingArr){
@@ -102,3 +119,6 @@ const inputToBook = event => {
 
 
 form.addEventListener("submit", inputToBook);
+
+addBookToArr('Yo', "Ma", 15, 20, null);
+displayBooks(booksReadingArr);

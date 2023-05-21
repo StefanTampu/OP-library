@@ -106,6 +106,7 @@ hr{
 
 .book-container{
     background-color: white;
+    position: relative;
     color: var(--toledo);
     height: 15rem;
     width: 25rem;
@@ -123,6 +124,25 @@ hr{
     font-style: italic;
     font-size: 2rem;
     margin-bottom: 1rem;
+}
+
+.icon-container{
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon{
+    height: 2rem;
+    transition: 0.5s;
+}
+
+.icon:hover{
+    height: 2.5rem;
 }
 
 #reading .book-container {
