@@ -1,9 +1,11 @@
 const bRead = document.getElementById("b-read");
 const bReading = document.getElementById("b-reading");
-const addButton = document.querySelectorAll(".add");
+const addButtons = document.querySelectorAll(".add");
 const addRead = document.getElementById("add-read");
 const addReading = document.getElementById("add-reading");
+const formSection = document.querySelector(".form-section");
 const form = document.getElementById("nb-form");
+const cancelButton = document.getElementById("cancel");
 
 let booksReadArr = [];
 let booksReadingArr = [];
@@ -50,18 +52,6 @@ const displayBooks = arr => {
     });
 }
 
-
-
-displayBooks(booksReadArr);
-displayBooks(booksReadingArr);
-
-//Form input converted to book object//
-//const inputToBook = event => {
-    //event.preventDefault();//
-    //const myFormData = new FormData(event.target);
-    //console.log(myFormData);
-//}
-
 const inputToBook = event => {
     event.preventDefault();
     let f = event.target;
@@ -80,7 +70,7 @@ const inputToBook = event => {
         }
         displayBooks(booksReadingArr);  
     } else if (arr === booksReadArr){
-        while (!bRead.firstElementChild.classList.contains("add")){   //Use firstElementChild instead of firstChild. Otherwise the white space inserted here between divs creates a #text node.
+        while (!bRead.firstElementChild.classList.contains("add")){ 
             bRead.removeChild(bRead.firstChild);
         }
         displayBooks(booksReadArr);
@@ -88,4 +78,21 @@ const inputToBook = event => {
 }
 
 form.addEventListener("submit", inputToBook);
+
+//Change form visibility by clicking on an "add book" button
+
+const formVisibility = () => {
+    for(let addButton of addButtons){
+        addButton.addEventListener("click", () => {
+            formSection.style.visibility = "visible";
+            formSection.style.opacity = "1";
+        });
+    }
+    cancelButton.addEventListener("click", () => {
+        formSection.style.visibility = "hidden";
+        formSection.style.opacity = "0";
+    });
+}
+
+formVisibility();
 
