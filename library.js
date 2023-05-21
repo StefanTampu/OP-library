@@ -125,29 +125,23 @@ addBookToArr('Yo', "Ma", 15, 20, null);
 addBookToArr('Ya', "Mo", 16, 20, null);
 displayBooks(booksReadingArr);
 
-//Delete book function
-const deleteBook = event => {
-    console.log(event.target.id);
-    console.log(booksReadingArr);
-        if (event.target.parentElement.parentElement.parentElement.id === "b-reading"){
-            booksReadingArr.splice(event.target.id, 1);
-            while (!bReading.firstElementChild.classList.contains("add")){ 
-                bReading.removeChild(bReading.firstChild);
-            }
-            displayBooks(booksReadingArr);  
-        } else if (event.target.parentElement.parentElement.parentElement.id === "b-read") {
-            console.log("Hi");
-            booksReadArr.splice(event.target.id, 1);
-            while (!bRead.firstElementChild.classList.contains("add")){ 
-                bRead.removeChild(bRead.firstChild);
-            }
-            displayBooks(booksReadArr);
-        };
+//Delete book functions. *Note that the events are delegated to bRead and bReading, to impact all grand-children remove buttons.
+bRead.addEventListener("click", (event) => {
+    if(event.target.classList.contains("remove")){
+        booksReadArr.splice(event.target.id, 1);
+        while (!bRead.firstElementChild.classList.contains("add")){ 
+            bRead.removeChild(bRead.firstChild);
+        }
+        displayBooks(booksReadArr);
+    }
+})
 
-}
-
-let rmvButtons = document.querySelectorAll(".remove");
-
-for (let rmvButton of rmvButtons){
-    rmvButton.addEventListener("click", deleteBook)
-}
+bReading.addEventListener("click", (event) => {
+    if(event.target.classList.contains("remove")){
+        booksReadingArr.splice(event.target.id, 1);
+        while (!bReading.firstElementChild.classList.contains("add")){ 
+            bReading.removeChild(bReading.firstChild);
+        }
+        displayBooks(booksReadingArr);  
+    }
+})
