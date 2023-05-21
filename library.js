@@ -8,23 +8,23 @@ const form = document.getElementById("nb-form");
 let booksReadArr = [];
 let booksReadingArr = [];
 
-function Book(title, author, pagesRead, pagesTotal){
+function Book(title, author, pagesRead, pagesTotal, read){
     this.title = title
     this.author = author
     this.pagesRead = pagesRead
     this.pagesTotal = pagesTotal
+    this.read = read;
 }
 
 
-function addBookToRead(title, author, pagesRead, pagesTotal){
-    const newBook = new Book(title, author, pagesRead, pagesTotal);
-    booksReadArr.push(newBook);
-} 
-
-function addBookToReading(title, author, pagesRead, pagesTotal){
-    const newBook = new Book(title, author, pagesRead, pagesTotal);
-    booksReadingArr.push(newBook);
-} 
+const addBookToArr = (title, author, pagesRead, pagesTotal, read) => {
+    const newBook = new Book(title, author, pagesRead, pagesTotal, read);
+    if (newBook.read){
+        booksReadArr.push(newBook);        
+    } else {
+        booksReadingArr.push(newBook);
+    }
+}
 
 
 //Function for displaying books from arrays in library//
@@ -50,7 +50,7 @@ const displayBooks = arr => {
     });
 }
 
-addBookToReading("Jurnal", "Nicolae", 33, 50);
+
 
 displayBooks(booksReadArr);
 displayBooks(booksReadingArr);
@@ -62,15 +62,30 @@ displayBooks(booksReadingArr);
     //console.log(myFormData);
 //}
 
-function trial(event){
+const inputToBook = event => {
     event.preventDefault();
     let f = event.target;
-    const newBook = new Book(f["book-title"].value, f["book-author"].value, f["pages-read"].value, f["book-pages"].value)
-    booksReadArr.push(newBook);
-    while (!bRead.firstElementChild.classList.contains("add")){   //Use firstElementChild instead of firstChild. Otherwise the white space inserted here between divs creates a #text node.
-        bRead.removeChild(bRead.firstChild);
+    let arr;
+    if (f["pages-read"].value < f["book-pages"].value){
+        f.read = null;
+        arr = booksReadingArr;
+    } else {
+        f.read = read;
+        arr = booksReadArr;
     }
-    displayBooks(booksReadArr);
+    addBookToArr(f["book-title"].value, f["book-author"].value, f["pages-read"].value, f["book-pages"].value, f.read);
+    if(arr === booksReadingArr){
+        while (!bReading.firstElementChild.classList.contains("add")){   //Use firstElementChild instead of firstChild. Otherwise the white space inserted here between divs creates a #text node.
+            bReading.removeChild(bReading.firstChild);
+        }
+        displayBooks(booksReadingArr);  
+    } else if (arr === booksReadArr){
+        while (!bRead.firstElementChild.classList.contains("add")){   //Use firstElementChild instead of firstChild. Otherwise the white space inserted here between divs creates a #text node.
+            bRead.removeChild(bRead.firstChild);
+        }
+        displayBooks(booksReadArr);
+    }
 }
 
-form.addEventListener("submit", trial);
+form.addEventListener("submit", inputToBook);
+
