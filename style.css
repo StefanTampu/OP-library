@@ -140,9 +140,16 @@ hr{
 
 /*Form styling*/
 
+.form-section {
+    position: fixed;
+    top: 20vh;
+    left: 30vw;
+    visibility: hidden;
+}
+
 form {
-    height: 50vh;
-    width: 35vw;
+    height: 60vh;
+    width: 40vw;
     padding: 1.5rem;
     border-radius: 0 12.5rem;
     background: radial-gradient(var(--bordeaux), var(--dark-bordeaux));
