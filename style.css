@@ -145,6 +145,7 @@ hr{
     top: 20vh;
     left: 30vw;
     visibility: hidden;
+    transition: 2s;
 }
 
 form {
@@ -176,7 +177,11 @@ input {
     border-radius: 0.5rem;
 }
 
-form button {
+.button-container{
+    width: 100%;    
+}
+
+form button{
     height: 3rem;
     width: 30%;
     font-size: 2rem;
