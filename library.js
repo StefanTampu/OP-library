@@ -5,6 +5,8 @@ const addRead = document.getElementById("add-read");
 const addReading = document.getElementById("add-reading");
 const formSection = document.querySelector(".form-section");
 const form = document.getElementById("nb-form");
+const formPRead = document.getElementById("pages-read");
+const totalPages = document.getElementById("book-pages");
 const cancelButton = document.getElementById("cancel");
 
 let booksReadArr = [];
@@ -52,33 +54,6 @@ const displayBooks = arr => {
     });
 }
 
-const inputToBook = event => {
-    event.preventDefault();
-    let f = event.target;
-    let arr;
-    if (f["pages-read"].value < f["book-pages"].value){
-        f.read = null;
-        arr = booksReadingArr;
-    } else {
-        f.read = read;
-        arr = booksReadArr;
-    }
-    addBookToArr(f["book-title"].value, f["book-author"].value, f["pages-read"].value, f["book-pages"].value, f.read);
-    if(arr === booksReadingArr){
-        while (!bReading.firstElementChild.classList.contains("add")){   //Use firstElementChild instead of firstChild. Otherwise the white space inserted here between divs creates a #text node.
-            bReading.removeChild(bReading.firstChild);
-        }
-        displayBooks(booksReadingArr);  
-    } else if (arr === booksReadArr){
-        while (!bRead.firstElementChild.classList.contains("add")){ 
-            bRead.removeChild(bRead.firstChild);
-        }
-        displayBooks(booksReadArr);
-    }
-}
-
-form.addEventListener("submit", inputToBook);
-
 //Change form visibility by clicking on an "add book" button
 
 const formVisibility = () => {
@@ -86,6 +61,11 @@ const formVisibility = () => {
         addButton.addEventListener("click", () => {
             formSection.style.visibility = "visible";
             formSection.style.opacity = "1";
+            if (addButton.id === "add-read"){
+                form.removeChild(formPRead);
+            } else if (addButton.id === "add-reading"){
+                form.insertBefore(formPRead, totalPages);
+            }
         });
     }
     cancelButton.addEventListener("click", () => {
@@ -96,3 +76,29 @@ const formVisibility = () => {
 
 formVisibility();
 
+//Function changes form input into new Book objects
+
+const inputToBook = event => {
+    event.preventDefault();
+    let arr;
+    if (form.children[3] !== formPRead || form["pages-read"].value === form["book-pages"].value){
+        form.read = read;
+        arr = booksReadArr;
+        addBookToArr(form["book-title"].value, form["book-author"].value, form["book-pages"].value, form["book-pages"].value, form.read);
+        while (!bRead.firstElementChild.classList.contains("add")){   //Use firstElementChild instead of firstChild. Otherwise the white space inserted here between divs creates a #text node.
+            bRead.removeChild(bRead.firstChild);
+        }
+        displayBooks(arr);  
+    } else {
+        form.read = null;
+        arr = booksReadingArr;
+        addBookToArr(form["book-title"].value, form["book-author"].value, form["pages-read"].value, form["book-pages"].value, form.read);
+        while (!bReading.firstElementChild.classList.contains("add")){ 
+            bReading.removeChild(bReading.firstChild);
+        }
+        displayBooks(arr);  
+    }
+}
+
+
+form.addEventListener("submit", inputToBook);
