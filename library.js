@@ -61,7 +61,7 @@ const displayBooks = arr => {
         const editIcon = document.createElement("img");
         editIcon.src="Resources/book-edit.svg";
         editIcon.classList.add("icon", "edit");
-        editIcon.setAttribute("id", "edit-icon");
+        editIcon.setAttribute("id", a);
 
         iconContainer.append(removeIcon, editIcon);
         bookContainer.append(bookTitle, bookAuthor, bookPages, iconContainer);
@@ -121,7 +121,7 @@ const inputToBook = event => {
 
 form.addEventListener("submit", inputToBook);
 
-addBookToArr('Yo', "Ma", 15, 20, null);
+addBookToArr('Yo', "Ma", 20, 20, null);
 addBookToArr('Ya', "Mo", 16, 20, null);
 displayBooks(booksReadingArr);
 
@@ -143,5 +143,27 @@ bReading.addEventListener("click", (event) => {
             bReading.removeChild(bReading.firstChild);
         }
         displayBooks(booksReadingArr);  
+    }
+})
+
+//Edit button clicked
+
+bRead.addEventListener("click", (event) => {
+    if(event.target.classList.contains("edit")){
+        booksReadArr.splice(event.target.id, 1);
+        bRead.removeChild(event.target.parentElement.parentElement);
+        formSection.style.visibility = "visible";
+        formSection.style.opacity = "1";
+        form.insertBefore(formPRead, totalPages);
+    }
+})
+
+bReading.addEventListener("click", (event) => {
+    if(event.target.classList.contains("edit")){
+        booksReadingArr.splice(event.target.id, 1);
+        bReading.removeChild(event.target.parentElement.parentElement);
+        formSection.style.visibility = "visible";
+        formSection.style.opacity = "1";
+        form.insertBefore(formPRead, totalPages);
     }
 })
