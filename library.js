@@ -121,10 +121,6 @@ const inputToBook = event => {
 
 form.addEventListener("submit", inputToBook);
 
-addBookToArr('Yo', "Ma", 20, 20, null);
-addBookToArr('Ya', "Mo", 16, 20, null);
-displayBooks(booksReadingArr);
-
 //Delete book functions. *Note that the events are delegated to bRead and bReading, to impact all grand-children remove buttons.
 bRead.addEventListener("click", (event) => {
     if(event.target.classList.contains("remove")){
